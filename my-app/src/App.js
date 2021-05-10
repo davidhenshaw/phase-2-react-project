@@ -1,23 +1,18 @@
-import logo from './logo.svg';
 import './App.css';
+import CardCollection from './containers/CardCollection'
+import FilterBar from './components/FilterBar.js'
+
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1>National Parks Finder</h1>
+        <img src="https://images-na.ssl-images-amazon.com/images/I/71xnLnPhq2L._AC_SL1500_.jpg" alt="map"/>
       </header>
+
+      <FilterBar/>
+      <CardCollection/>
     </div>
   );
 }
