@@ -19,9 +19,16 @@ state ={
     type: 'all'
   }
 }
+
+handleData = (parksData) => {
+  this.setState({
+    parks:parksData
+  })
+}
+
 componentDidMount = () => {
 axios.get('http://localhost:3001/data')
-.then((response)=> console.log(response.data))
+.then((response)=> this.handleData(response.data))
 }
   render(){
     return(
@@ -52,7 +59,7 @@ axios.get('http://localhost:3001/data')
             <Favorites />
           </Route>
           <Route path="/">
-          <CardCollection />
+          <CardCollection parksData={this.state.parks}/>
           </Route>
         </Switch>
       </div>

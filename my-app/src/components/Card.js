@@ -5,8 +5,8 @@ class Card extends React.Component {
     render(){
         return (
         <div className="card">
-            <h2>"name of park"</h2>
-            <img src="" alt="park"/>
+            <h2>{this.props.park.fullName}</h2>
+            <img src={this.props.park.images[0].url} alt="park"/>
                 <button className="like-btn">favorite ⭐️ </button>
         </div>
         );
