@@ -4,10 +4,10 @@ class Card extends React.Component {
 
     render(){
         return (
-        <div className="card"id={/*card id*/}>
-            <h2>{/*name of park*/}</h2>
-            <img src={/*park photo*/} alt={/*name of park*/}/>
-                <button className="like-btn"onClick={/*event*/}>favorite ⭐️ </button>
+        <div className="card">
+            <h2>"name of park"</h2>
+            <img src="" alt="park"/>
+                <button className="like-btn">favorite ⭐️ </button>
         </div>
         );
     }
