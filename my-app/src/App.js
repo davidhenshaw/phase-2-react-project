@@ -7,16 +7,30 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import React from 'react';
+import axios from 'axios';
 
 
-function App() {
-  return (
+class App extends React.Component{
+
+state ={
+  parks: [],
+  filers:{
+    type: 'all'
+  }
+}
+componentDidMount = () => {
+axios.get('http://localhost:3001/data')
+.then((response)=> console.log(response.data))
+}
+  render(){
+    return(
     <Router>
       <div className="App">
         <nav>
           <ul>
             <li>
-              <Link to="/">Home</Link>
+              <Link to="/">Card Collection </Link>
             </li>
             <li>
               <Link to="/favorites">Favorites</Link>
@@ -31,25 +45,22 @@ function App() {
           </header>
 
           <FilterBar />
-          <CardCollection />
+          
         </div>
         <Switch>
           <Route path="/favorites">
             <Favorites />
           </Route>
           <Route path="/">
-            <Home />
+          <CardCollection />
           </Route>
         </Switch>
       </div>
     </Router>
-
-
-
-
-
-
-  );
+    )
+  };
 }
-
+function Favorites() {
+  return <h2>Favorites</h2>;
+}
 export default App;
