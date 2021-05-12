@@ -11,7 +11,7 @@ class CardCollection extends React.Component {
             
             />
         ))
-        return <div>
+        return <div className="card-collection">
             {card}
             </div>
     }
