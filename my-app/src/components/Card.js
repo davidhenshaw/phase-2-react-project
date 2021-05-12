@@ -13,7 +13,7 @@ class Card extends React.Component {
     render(){
         return (
         <div className="card">
-            <img src={this.props.park.images[0].url} alt="park"/>
+            <img className="park-img"src={this.props.park.images[0].url} alt="park"/>
             <h2>{this.props.park.fullName}</h2>
             <h3>{this.props.park.states}</h3>
             <span>{this.renderActivities()}</span>

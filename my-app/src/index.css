@@ -13,3 +13,27 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.card-collection{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.card{
+  border: 5px solid white;
+  border-radius: 5%;
+  width: 25vw;
+  height: auto;
+  margin: 10px;
+}
+
+.card h2{
+  background-color: grey;
+}
+
+.park-img {
+  width: 80%;
+  height: auto;
+  margin-top: 5%;
+}
