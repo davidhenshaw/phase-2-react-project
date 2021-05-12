@@ -2,6 +2,7 @@ import React from 'react';
 
 class FilterBar extends React.Component {
 
+   
     render(){
         return (
         <div className="ui form">
@@ -63,7 +64,7 @@ class FilterBar extends React.Component {
         </div>
 
         <div className="field">
-          <button className="ui secondary button" onClick={this.onStateSelected}>Search</button>
+          <button className="ui secondary button" onClick={this.onFindStates}>Search</button>
         </div>
       </div>
     )
