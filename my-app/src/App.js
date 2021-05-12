@@ -11,48 +11,52 @@ import React from 'react';
 import axios from 'axios';
 
 
-class App extends React.Component{
+class App extends React.Component {
 
-  state ={
+  state = {
     parks: [],
-    filters:{
+    filters: {
       states: 'all'
     }
   }
-  
-  selectState =(val) =>{
-    this.setState({states:val})
+
+  selectState = (val) => {
+    this.setState({ states: val })
   }
 
   handleData = (parksData) => {
     this.setState({
-      parks:parksData
+      parks: parksData
     })
   }
-  
+
   componentDidMount = () => {
-  axios.get("http://localhost:3001/data")
-  .then((response)=> this.handleData(response.data))
-  
+    axios.get("http://localhost:3001/data")
+      .then((response) => this.handleData(response.data))
+
   }
+
+  onFindStates = () => {
+    let URL = "http://localhost:3001/data";
+    
+    if (this.state.filters.states !== 'all') {
+      URL += `?states=${this.state.filters.states}`
+    }
+    console.log(this.state.filters.states)
+    fetch(URL)
+      .then(res => res.json())
+      .then(filteredStates => this.setState({ parks: filteredStates }))
+  
+}
 
   onChangeType = ({ target: { value } }) => {
-    this.setState({ filter: { type: value } })
+    this.setState({ filters: { ...this.state.filters, states:value } })
   }
 
-  onFindStates =() =>{
-  let URL = "http://localhost:3001/data";
 
-  if (this.state.filters.states !=='all'){
-    URL += `?states=${this.state.filters.states}` 
-  } 
-  fetch(URL)
-  .then(res => res.json())
-  .then(filteredStates => this.setState({ states: filteredStates }))
-}
-    render(){
-      
-      return(
+  render() {
+
+    return (
       <Router>
         <div className="App">
           <nav>
@@ -65,30 +69,30 @@ class App extends React.Component{
               </li>
             </ul>
           </nav>
-  
+
           <div className="App">
             <header className="App-header">
               <h1>National Parks Finder</h1>
               <img src="https://images-na.ssl-images-amazon.com/images/I/71xnLnPhq2L._AC_SL1500_.jpg" alt="map" />
             </header>
-  
-            <FilterBar onChangeType={this.onChangeType} onFindStates= {this.onFindStates}/>
-            
+
+            <FilterBar onChangeType={this.onChangeType} onFindStates={this.onFindStates} />
+
           </div>
           <Switch>
             <Route path="/favorites">
               <Favorites />
             </Route>
             <Route path="/">
-            <CardCollection parksData={this.state.parks}/>
+              <CardCollection parksData={this.state.parks} />
             </Route>
           </Switch>
         </div>
       </Router>
-      )
-    };
-  }
-  function Favorites() {
-    return <h2>Favorites</h2>;
-  }
-  export default App;
+    )
+  };
+}
+function Favorites() {
+  return <h2>Favorites</h2>;
+}
+export default App;

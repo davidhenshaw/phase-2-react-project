@@ -64,7 +64,7 @@ class FilterBar extends React.Component {
         </div>
 
         <div className="field">
-          <button className="ui secondary button" onClick={this.onFindStates}>Search</button>
+          <button className="ui secondary button" onClick={this.props.onFindStates}>Search</button>
         </div>
       </div>
     )
