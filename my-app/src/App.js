@@ -15,8 +15,8 @@ class App extends React.Component{
 
 state ={
   parks: [],
-  filers:{
-    type: 'all'
+  filters:{
+    states: 'all'
   }
 }
 
@@ -25,10 +25,27 @@ handleData = (parksData) => {
     parks:parksData
   })
 }
+// findStateParks = () =>{
+// let URL = "http://localhost:3001/data";
+
+// if (this.state.filters.states !='all'){
+//   URL += `?type=${this.state.filters.states}` 
+// }
+
 
 componentDidMount = () => {
+  let URL = "http://localhost:3001/data";
+
+  if (this.state.filters.states !='all'){
+    URL += `?states=${this.state.filters.states}` 
+  } 
 axios.get('http://localhost:3001/data')
 .then((response)=> this.handleData(response.data))
+console.log(this.state.filters.states)
+}
+
+onChangeType = ({target:{value}}) => {
+  this.setState({filters:{...this.state.filters, states:value}})
 }
   render(){
     return(
@@ -51,7 +68,7 @@ axios.get('http://localhost:3001/data')
             <img src="https://images-na.ssl-images-amazon.com/images/I/71xnLnPhq2L._AC_SL1500_.jpg" alt="map" />
           </header>
 
-          <FilterBar />
+          <FilterBar onChangeType={this.onChangeType} onStateSelected={this.componentDidMount}/>
           
         </div>
         <Switch>
