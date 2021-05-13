@@ -33,10 +33,18 @@ class App extends React.Component {
     })
   }
 
+  handleFavoritesData = (favoritesData) => {
+    this.setState({
+      favorites: favoritesData
+    })
+  }
+
   componentDidMount = () => {
     axios.get("http://localhost:3001/data")
       .then((response) => this.handleData(response.data))
 
+    axios.get("http://localhost:3002/favoriteParks")
+      .then(response => this.handleFavoritesData(response.data))
   }
 
   onFindStates = () => {
@@ -45,11 +53,9 @@ class App extends React.Component {
     if (this.state.filters.states !== 'all') {
       URL += `?states=${this.state.filters.states}`
     }
-    console.log(this.state.filters.states)
-    fetch(URL)
-      .then(res => res.json())
-      .then(filteredStates => this.setState({ parks: filteredStates }))
 
+    axios.get(URL)
+      .then(filteredStates => this.setState({parks: filteredStates}))
   }
 
   onChangeType = ({ target: { value } }) => {
@@ -57,14 +63,20 @@ class App extends React.Component {
   }
 
   addFavorite = (favoriteItem) => {
-    console.log("pickme")
     if (!this.state.favorites.find(alreadyFavorite => favoriteItem === alreadyFavorite))
-      this.setState({favorites: [...this.state.favorites, favoriteItem] });
+    {
+      axios.post("http://localhost:3002/favoriteParks", favoriteItem )
+      .then(() => this.setState({favorites: [...this.state.favorites, favoriteItem] }))
+    }    
   }
 
   removeFromFavorites = (favoriteItem) => {
-    console.log("working")
-    this.setState({favorites: this.state.favorites.filter(oldFavorite => oldFavorite !== favoriteItem)})
+
+    axios.delete("http://localhost:3002/favoriteParks/" + favoriteItem.id)
+      .then( () => 
+        this.setState({favorites: this.state.favorites.filter(oldFavorite => oldFavorite !== favoriteItem)})
+      )
+
   }
 
 
