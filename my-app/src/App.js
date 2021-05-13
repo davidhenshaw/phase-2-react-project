@@ -12,6 +12,9 @@ import React from 'react';
 import axios from 'axios';
 
 
+const parksURL = "http://localhost:3001/data";
+const favoritesURL = "http://localhost:3002/favoriteParks";
+
 class App extends React.Component {
 
   state = {
@@ -40,15 +43,15 @@ class App extends React.Component {
   }
 
   componentDidMount = () => {
-    axios.get("http://localhost:3001/data")
+    axios.get(parksURL)
       .then((response) => this.handleData(response.data))
 
-    axios.get("http://localhost:3002/favoriteParks")
+    axios.get(favoritesURL)
       .then(response => this.handleFavoritesData(response.data))
   }
 
   onFindStates = () => {
-    let URL = "http://localhost:3001/data";
+    let URL = parksURL;
 
     if (this.state.filters.states !== 'all') {
       URL += `?states=${this.state.filters.states}`
@@ -65,14 +68,14 @@ class App extends React.Component {
   addFavorite = (favoriteItem) => {
     if (!this.state.favorites.find(alreadyFavorite => favoriteItem === alreadyFavorite))
     {
-      axios.post("http://localhost:3002/favoriteParks", favoriteItem )
+      axios.post(favoritesURL, favoriteItem )
       .then(() => this.setState({favorites: [...this.state.favorites, favoriteItem] }))
     }    
   }
 
   removeFromFavorites = (favoriteItem) => {
 
-    axios.delete("http://localhost:3002/favoriteParks/" + favoriteItem.id)
+    axios.delete(favoritesURL + '/' + favoriteItem.id)
       .then( () => 
         this.setState({favorites: this.state.favorites.filter(oldFavorite => oldFavorite !== favoriteItem)})
       )
