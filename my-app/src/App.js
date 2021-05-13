@@ -1,5 +1,6 @@
 import './App.css';
 import CardCollection from './containers/CardCollection'
+import Favorites from './containers/Favorites'
 import FilterBar from './components/FilterBar.js'
 import {
   BrowserRouter as Router,
@@ -15,9 +16,11 @@ class App extends React.Component {
 
   state = {
     parks: [],
+    favorites: [],
     filters: {
       states: 'all'
-    }
+    },
+
   }
 
   selectState = (val) => {
@@ -38,7 +41,7 @@ class App extends React.Component {
 
   onFindStates = () => {
     let URL = "http://localhost:3001/data";
-    
+
     if (this.state.filters.states !== 'all') {
       URL += `?states=${this.state.filters.states}`
     }
@@ -46,11 +49,22 @@ class App extends React.Component {
     fetch(URL)
       .then(res => res.json())
       .then(filteredStates => this.setState({ parks: filteredStates }))
-  
-}
+
+  }
 
   onChangeType = ({ target: { value } }) => {
-    this.setState({ filters: { ...this.state.filters, states:value } })
+    this.setState({ filters: { ...this.state.filters, states: value } })
+  }
+
+  addFavorite = (favoriteItem) => {
+    console.log("pickme")
+    if (!this.state.favorites.find(alreadyFavorite => favoriteItem === alreadyFavorite))
+      this.setState({favorites: [...this.state.favorites, favoriteItem] });
+  }
+
+  removeFromFavorites = (favoriteItem) => {
+    console.log("working")
+    this.setState({favorites: this.state.favorites.filter(oldFavorite => oldFavorite !== favoriteItem)})
   }
 
 
@@ -65,7 +79,7 @@ class App extends React.Component {
                 <Link to="/">Card Collection </Link>
               </li>
               <li>
-                <Link to="/favorites">Favorites</Link>
+                <Link to="/Favorites">Favorites</Link>
               </li>
             </ul>
           </nav>
@@ -80,11 +94,11 @@ class App extends React.Component {
 
           </div>
           <Switch>
-            <Route path="/favorites">
-              <Favorites />
+            <Route path="/Favorites">
+              <Favorites  removeFromFavorites={this.removeFromFavorites} favoriteData={this.state.favorites} parksData={this.state.parks} />
             </Route>
             <Route path="/">
-              <CardCollection parksData={this.state.parks} />
+              <CardCollection addFavorite={this.addFavorite} parksData={this.state.parks} />
             </Route>
           </Switch>
         </div>
@@ -92,7 +106,5 @@ class App extends React.Component {
     )
   };
 }
-function Favorites() {
-  return <h2>Favorites</h2>;
-}
+
 export default App;

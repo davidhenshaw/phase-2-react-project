@@ -8,6 +8,7 @@ class CardCollection extends React.Component {
             <Card
             park={park}
             key={park.id}
+            handleClick={this.props.addFavorite}
             
             />
         ))

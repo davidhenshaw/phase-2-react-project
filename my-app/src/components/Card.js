@@ -12,13 +12,13 @@ class Card extends React.Component {
 
     render(){
         return (
-        <div className="card">
+        <div className="card" key={this.props.park.id}>
             <img className="park-img"src={this.props.park.images[0].url} alt="park"/>
             <h2>{this.props.park.fullName}</h2>
             <h3>{this.props.park.states}</h3>
             <span>{this.renderActivities()}</span>
             <p>{this.props.park.description}</p>
-            <button className="like-btn">favorite ⭐️ </button>
+            <button className="like-btn"onClick={()=>this.props.handleClick(this.props.park)}>favorite ⭐️ </button>
         </div>
         );
     }
