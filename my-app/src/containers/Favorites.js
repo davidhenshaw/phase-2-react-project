@@ -15,7 +15,7 @@ render(){
     })
     
     return (
-        <div className="favoritesArea">
+        <div className="card-collection">
             {card}
         </div>
     );

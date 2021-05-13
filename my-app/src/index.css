@@ -20,11 +20,6 @@ code {
   flex-wrap: wrap;
   justify-content: center;
 }
-.favoritesArea{
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
 
 .card{
   border: 5px solid white;
