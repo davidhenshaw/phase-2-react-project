@@ -55,7 +55,7 @@ class App extends React.Component {
     }
 
     axios.get(URL)
-      .then(filteredStates => this.setState({parks: filteredStates}))
+      .then(response => this.setState({parks: response.data}))
   }
 
   onChangeType = ({ target: { value } }) => {
