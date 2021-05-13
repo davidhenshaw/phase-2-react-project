@@ -16,7 +16,13 @@ render(){
     
     return (
         <div className="card-collection">
-            {card}
+            {
+                this.props.favoriteData.length > 0 
+                ?
+                card
+                :
+                <h2>Your favorites list appears to be empty!</h2>
+            }
         </div>
     );
 }

@@ -13,7 +13,13 @@ class CardCollection extends React.Component {
             />
         ))
         return <div className="card-collection">
-            {card}
+            {
+                this.props.parksData.length > 0 
+                ?
+                card
+                :
+                <h2>Sorry, we couldn't find any national parks based on your search :(</h2>
+            }
             </div>
     }
 
