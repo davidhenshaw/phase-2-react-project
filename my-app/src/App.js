@@ -74,20 +74,16 @@ class App extends React.Component {
       <Router>
         <div className="App">
           <nav>
-            <ul>
-              <li>
-                <Link to="/">Card Collection </Link>
-              </li>
-              <li>
-                <Link to="/Favorites">Favorites</Link>
-              </li>
-            </ul>
+            <span>
+              <Link className="nav-link" to="/">Card Collection </Link>
+              <Link className="nav-link" to="/Favorites">Favorites</Link>
+            </span>
           </nav>
 
           <div className="App">
             <header className="App-header">
               <h1>National Parks Finder</h1>
-              <img src="https://images-na.ssl-images-amazon.com/images/I/71xnLnPhq2L._AC_SL1500_.jpg" alt="map" />
+              <img className="header-image" src="https://images-na.ssl-images-amazon.com/images/I/71xnLnPhq2L._AC_SL1500_.jpg" alt="map" />
             </header>
 
             <FilterBar onChangeType={this.onChangeType} onFindStates={this.onFindStates} />
