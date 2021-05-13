@@ -38,6 +38,18 @@ code {
   margin: 10px;
 }
 
+.card a:link{
+  color:white;
+}
+
+.card a:visited{
+  color: rgb(190, 190, 190);
+}
+
+.card a:hover{
+  color:rgb(90, 114, 182)
+}
+
 .card h2{
   background-color: grey;
 }
