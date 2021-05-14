@@ -10,8 +10,9 @@ class FilterBar extends React.Component {
         <div className="field">
           <select name="type" id="type" onChange={this.props.onChangeType}>
             <option value="all">All states</option>
-            <option value="AL">Alabama</option>
             <option value="AK">Alaska</option>
+            <option value="AL">Alabama</option>
+            <option value="AR">Arkansas</option>
             <option value="AZ">Arizona</option>
             <option value="CA">California</option>
             <option value="CO">Colorado</option>
@@ -50,7 +51,7 @@ class FilterBar extends React.Component {
             <option value="PA">Pennsylvania</option>
             <option value="RI">Rhode Island</option>
             <option value="SC">South Carolina</option>
-            <option value="SD">Couth Dakota</option>
+            <option value="SD">South Dakota</option>
             <option value="TN">Tennessee</option>
             <option value="TX">Texas</option>
             <option value="UT">Utah</option>
