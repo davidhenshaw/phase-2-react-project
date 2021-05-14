@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import placeholder from './no-image-placeholder.png';
 
 class Card extends React.Component {
 
@@ -13,7 +14,16 @@ class Card extends React.Component {
     render(){
         return (
         <div className="card" key={this.props.park.id}>
-            <img className="park-img"src={this.props.park.images[0].url} alt="park"/>
+            <img 
+                className="park-img"
+                src={this.props.park.images.length > 0
+                    ? 
+                        this.props.park.images[0].url
+                    :
+                        placeholder
+                } 
+                alt="park"
+            />
             <a href={this.props.park.url} target="_blank">
                 <h2>
                     {this.props.park.fullName}

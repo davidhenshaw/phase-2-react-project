@@ -12,7 +12,7 @@ import React from 'react';
 import axios from 'axios';
 
 
-const parksURL = "http://localhost:3001/data";
+const parksURL = "https://developer.nps.gov/api/v1/parks?api_key=ozWxLqLJdt1ZnyKb5MFZBbugyBUCGdlN0cxJpdmV";
 const favoritesURL = "http://localhost:3002/favoriteParks";
 
 class App extends React.Component {
@@ -44,7 +44,7 @@ class App extends React.Component {
 
   componentDidMount = () => {
     axios.get(parksURL)
-      .then((response) => this.handleData(response.data))
+      .then((response) => this.handleData(response.data.data))
 
     axios.get(favoritesURL)
       .then(response => this.handleFavoritesData(response.data))
@@ -54,11 +54,11 @@ class App extends React.Component {
     let URL = parksURL;
 
     if (this.state.filters.states !== 'all') {
-      URL += `?states=${this.state.filters.states}`
+      URL += `&statecode=${this.state.filters.states}`
     }
 
     axios.get(URL)
-      .then(response => this.setState({parks: response.data}))
+      .then(response => this.setState({parks: response.data.data}))
   }
 
   onChangeType = ({ target: { value } }) => {
